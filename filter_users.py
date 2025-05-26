@@ -106,6 +106,7 @@ def handle_email():
 
     return filter_users_by_email(user_email)
 
+
 if __name__ == "__main__":
     try:
         print("Enter quit to exit the program.")
