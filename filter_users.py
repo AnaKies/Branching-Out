@@ -56,6 +56,10 @@ def handle_name():
     """
     while True:
         user_name = input("Enter a name to filter users: ").strip()
+
+        if user_name.lower() == "quit":
+            return user_name
+
         if not user_name.isalpha():
             print("Please enter a valid name.")
             continue
@@ -70,6 +74,10 @@ def handle_age():
     """
     while True:
         user_age = input("Enter an age to filter users: ").strip()
+
+        if user_age.lower() == "quit":
+            return user_age
+
         if not user_age.isdigit():
             print("Please enter a valid age.")
             continue
@@ -84,6 +92,10 @@ def handle_email():
     """
     while True:
         user_email = input("Enter an email to filter users: ").strip()
+
+        if user_email.lower() == "quit":
+            return user_email
+
         if "@" not in user_email or not user_email.endswith(".com"):
             print("Please enter a valid email with @ and '.com' ending.")
             continue
@@ -120,7 +132,7 @@ if __name__ == "__main__":
             filter_option = input("What would you like to filter by name, "
                                   "age or email?: ").strip().lower()
 
-            if filter_option == "quit":
+            if filter_option.lower() == "quit":
                 break
 
             action = commands.get(filter_option)
@@ -130,6 +142,8 @@ if __name__ == "__main__":
                 continue
 
             filtered_users = action()
+            if filtered_users == "quit":
+                break
 
             if not filtered_users:
                 print("No users found.")
