@@ -49,35 +49,69 @@ def filter_users_by_email(email):
     return filtered_users_by_email
 
 
+def validate_user_age_input(age_of_user):
+    """
+    Validates user age input.
+    Displays an error message if users' age is invalid.
+    :return: Validated age of the user
+    """
+    while True:
+        if not age_of_user.isdigit():
+            print("Please enter a valid age.")
+            continue
+        break
+    return age_of_user
+
+
+def validate_user_email_input(email_of_user):
+    """
+    Validates user email input.
+    Displays an error message if users' email is invalid.
+    :return: Validated email of the user
+    """
+    while True:
+        if "@" not in email_of_user or not email_of_user.endswith(".com"):
+            print("Please enter a valid email.")
+            continue
+        break
+    return email_of_user
+
+
+def validate_user_name(name_of_user):
+    """
+    Validates username input.
+    Displays an error message if the user's name is invalid.
+    :param name_of_user: Raw name input
+    :return: Validated name
+    """
+    while True:
+        if not name_of_user.isalpha():
+            print("Please enter a valid name.")
+            continue
+        break
+    return name_of_user
+
+
 if __name__ == "__main__":
     try:
         print("Enter quit to exit the program.")
+
         while True:
-            filter_option = input(
-                "What would you like to filter by name, age or email?: "
-            ).strip().lower()
+            filter_option = input("What would you like to filter by name, "
+                                  "age or email?: ").strip().lower()
 
             if filter_option == "name":
-                name_to_search = input("Enter a name to filter users: ").strip()
-                filtered_users = filter_users_by_name(name_to_search)
+                user_name = input("Enter a name to filter users: ").strip()
+                valid_name = validate_user_name(user_name)
+                filtered_users = filter_users_by_name(valid_name)
             elif filter_option == "age":
-                while True:
-                    user_age = input("Enter an age to filter users: ").strip()
-                    d = type(user_age)
-                    if not user_age.isdigit():
-                        print("Please enter a valid age.")
-                        continue
-                    break
-                filtered_users = filter_users_by_age(int(user_age))
-
+                user_age = input("Enter an age to filter users: ").strip()
+                valid_age = validate_user_age_input(user_age)
+                filtered_users = filter_users_by_age(int(valid_age))
             elif filter_option == "email":
-                while True:
-                    user_email = input("Enter an email to filter users: ").strip()
-                    if "@" not in user_email or not user_email.endswith(".com"):
-                        print("Please enter a valid email.")
-                        continue
-                    break
-                filtered_users = filter_users_by_email(user_email)
+                user_email = input("Enter an email to filter users: ").strip()
+                valid_email = validate_user_email_input(user_email)
+                filtered_users = filter_users_by_email(valid_email)
             elif filter_option == "quit":
                 break
             else:
